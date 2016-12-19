@@ -1,0 +1,17 @@
+{
+  "name": "cinema",
+  "description": "",
+  "main": "",
+  "authors": [
+    "the1alt <thibaut.faurel@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
