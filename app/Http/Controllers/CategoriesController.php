@@ -38,6 +38,6 @@ class CategoriesController extends Controller
      return view('categories/remove');
    }
 
-   
+
 
 }

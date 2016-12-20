@@ -12,6 +12,9 @@ class Movies extends Model
      */
     protected $table = "movies";
 
+    /**
+     *    Connexions Tables
+     */
     public function categories(){
       return $this->belongsTo('App\Categories');
     }
@@ -20,6 +23,13 @@ class Movies extends Model
       return $this->belongsToMany('App\Tags', 'tags_movies');
     }
 
+
+
+
+
+    /**
+     * Statics function for dashboard
+     */
     public static function getNbActiveMovies(){
       return DB::table('movies')
         ->where('visible', 1)
@@ -35,5 +45,6 @@ class Movies extends Model
       return DB::table('movies')
         ->avg('duree');
     }
+
 
 }

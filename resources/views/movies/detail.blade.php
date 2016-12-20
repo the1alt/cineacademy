@@ -10,7 +10,7 @@
     <div class="tray tray-center">
       <!-- Begin .page-heading -->
       <div class="page-heading">
-        <a href="#" class="btn-move btn-prev"><i class="fa fa-angle-left"></i></a>
+        <a href="{{ route('movies.detail', ['id' => $movie['id']-1]) }}" class="btn-move btn-prev"><i class="fa fa-angle-left"></i></a>
         <div class="media clearfix">
           <div class="media-left pr30">
             <div class="modal-content">
@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <a href="#" class="btn-move btn-next"><i class="fa fa-angle-right"></i></a>
+        <a href="{{ route('movies.detail', ['id' => $movie['id']+1]) }}" class="btn-move btn-next"><i class="fa fa-angle-right"></i></a>
 
       </div>
 

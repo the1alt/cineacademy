@@ -48,4 +48,34 @@ class MoviesController extends Controller
        'movie' => $movie
      ]);
    }
+
+   public static function preview($id){
+     $movies = Movies::all();
+     $ids = [];
+     foreach($movies as $movie) {
+       $ids[]= $movie->id;
+     }
+     $key = array_search($id, $ids);
+     if ($key === 1) {
+       return false;
+     }
+     else
+     {
+       return detail($ids[$key-1]);
+     }
+   }
+   public static function next($id){
+     $movies = Movies::all();
+     $ids = [];
+     foreach($movies as $movie) {
+       $ids[]= $movie->id;
+     }
+     $key = array_search($id, $ids);
+
+       $newid = $ids[$key+1];
+       $movie = Movies::find($newid);
+       return view('movies/detail', [
+         'movie' => $movie
+       ]);;
+   }
 }
