@@ -11,7 +11,7 @@
             <div class="caption">
               <h3>{{$actor->firstname}} {{$actor->lastname}}</h3>
               <p class="limit">{{str_limit(strip_tags($actor->biography),300)}}</p>
-              <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+              <p><a href="{{ route('actors.remove', ['id' => $actor['id']]) }}" class="btn btn-danger" role="button"><i class="fa fa-trash"></i> Supprimer</a></p>
             </div>
           </div>
         </div>

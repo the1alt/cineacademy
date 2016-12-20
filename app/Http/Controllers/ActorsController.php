@@ -33,7 +33,9 @@ class ActorsController extends Controller
   /**
    * Page supprimer actors
    */
-   public function remove(){
-     return view('actors/remove');
+   public function remove($id){
+     $actor = Actors::find($id);
+     $actor->delete();
+     return redirect()->back();
    }
 }

@@ -41,4 +41,11 @@ class MoviesController extends Controller
 
      return redirect()->back();
    }
+
+   public function detail($id){
+     $movie = Movies::find($id);
+     return view('movies/detail', [
+       'movie' => $movie
+     ]);
+   }
 }

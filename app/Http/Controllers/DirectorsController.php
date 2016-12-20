@@ -33,7 +33,10 @@ class DirectorsController extends Controller
   /**
    * Page supprimer director
    */
-   public function remove(){
-     return view('directors/remove');
+   public function remove($id){
+     $director = Directors::find($id);
+     $director->delete();
+
+     return redirect()->back();
    }
 }
