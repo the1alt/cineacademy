@@ -15,13 +15,13 @@
   <!-- Font CSS (Via CDN) -->
   <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700'>
   <link rel="stylesheet" type="text/css"  href="{{asset('vendor/plugins/magnific/magnific-popup.css')}}">
-
+  @section('css')
+  @show
   <!-- Theme CSS -->
   <link rel="stylesheet" type="text/css" href="{{asset('skin/default_skin/css/theme.css')}}">
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{asset('img/favicon.ico')}}">
-
   {{-- Ma CSS --}}
 
   <link rel="stylesheet" href="{{asset('css/main.css')}}" media="screen" title="no title">
