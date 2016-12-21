@@ -5,7 +5,7 @@
   <!-- Meta, title, CSS, favicons, etc. -->
   <meta charset="utf-8">
   @section('title')
-    <title>AbsoluteAdmin - A Responsive Bootstrap 3 Admin Dashboard Template</title>
+    <title>CineAcademy</title>
   @show
   <meta name="keywords" content="HTML5 Bootstrap 3 Admin Template UI Theme" />
   <meta name="description" content="AbsoluteAdmin - A Responsive HTML5 Admin UI Framework">

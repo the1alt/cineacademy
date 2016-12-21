@@ -12,11 +12,6 @@
   box-shadow: 0 4px 9px rgba(0, 0, 0, 0.7);
 }
 
-.wrapper{
-  display:flex;
-  flex-flow: row nowrap;
-  align-items : center;
-}
 
 #blogvision{
   height:100%;
@@ -70,6 +65,20 @@
   border-left:1px solid #d9d9d9;
 }
 
+.wrapper:hover img {
+	transition: all 0.2s ease 0s;
+	opacity: 0.6;
+}
+
+.wrapper:hover img:hover {
+	transition: all 0.2s ease 0s;
+	opacity: 1;
+}
+.img-box img:hover{
+  transform: scale(1.2);
+}
+
+
 /*************  CAPTION **************************/
 .captionBox{
   overflow:hidden;
@@ -84,21 +93,23 @@
     -o-transition: all 300ms ease-out;
     -ms-transition: all 300ms ease-out;
     transition: all 300ms ease-out;
-    left: 0;
-    bottom:0;
+    left: 12px;
 }
 
 .captionBox .full-caption {
-    width: 200px;
     bottom: -40px ;
     text-align: left;
-    padding: 10px;
+    box-sizing: border-box;
+    padding: 10px 0;
+    text-align:center;
     overflow:hidden;
 }
 
 .captionBox:hover .full-caption {
-    -moz-transform: translateY(-100%);
-    -o-transform: translateY(-100%);
-    -webkit-transform: translateY(-100%);
-    transform: translateY(-100%);
+
+    -moz-transform: translateY(-125%);
+    -o-transform: translateY(-125%);
+    -webkit-transform: translateY(-125%);
+    transform: translateY(-125%);
+
 }

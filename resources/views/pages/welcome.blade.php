@@ -85,7 +85,7 @@
           </div>
           <div class="container-fluid" style="padding:1em">
             <div class="row wrapper">
-              <div class="col-md-4">
+              <div class="col-md-4 ">
                 <a href="{{ route('movies.detail', ['id' => $actorsNbMovies[0]->id])}}" class="btn captionBox" >
                   <img src="{{$actorsNbMovies[0]->image}}" alt="" class="img-responsive"/>
                   <span class="caption full-caption">{{$actorsNbMovies[0]->firstname." ".$actorsNbMovies[0]->lastname}} </span>
@@ -97,10 +97,12 @@
                   <span class="caption full-caption">{{$actorsNbMovies[1]->firstname." ".$actorsNbMovies[1]->lastname}} </span>
                 </a>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-4 ">
                 <a href="{{ route('movies.detail', ['id' => $actorsNbMovies[2]->id])}}" class="btn captionBox" >
-                  <img src="{{$actorsNbMovies[2]->image}}" alt="" class="img-responsive"/>
-                  <span class="caption full-caption">{{$actorsNbMovies[2]->firstname." ".$actorsNbMovies[2]->lastname}} </span>
+                  <div class="babar">
+                    <img src="{{$actorsNbMovies[2]->image}}" alt="" class="img-responsive"/>
+                    <span class="caption full-caption">{{$actorsNbMovies[2]->firstname." ".$actorsNbMovies[2]->lastname}} </span>
+                  </div>
                 </a>
               </div>
 
@@ -124,68 +126,101 @@
         var demoHighCharts = function () {
 
 
-                // Define chart color patterns
-                var highColors = [bgWarning, bgPrimary, bgInfo, bgAlert,
-                    bgDanger, bgSuccess, bgSystem, bgDark
-                ];
+          // Define chart color patterns
+          var highColors = [bgWarning, bgPrimary, bgInfo, bgAlert,
+              bgDanger, bgSuccess, bgSystem, bgDark
+          ];
 
-                // Color Library we used to grab a random color
-                var sparkColors = {
-                    "primary": [bgPrimary, bgPrimaryLr, bgPrimaryDr],
-                    "info": [bgInfo, bgInfoLr, bgInfoDr],
-                    "warning": [bgWarning, bgWarningLr, bgWarningDr],
-                    "success": [bgSuccess, bgSuccessLr, bgSuccessDr],
-                    "alert": [bgAlert, bgAlertLr, bgAlertDr]
-                };
+          // Color Library we used to grab a random color
+          var sparkColors = {
+              "primary": [bgPrimary, bgPrimaryLr, bgPrimaryDr],
+              "info": [bgInfo, bgInfoLr, bgInfoDr],
+              "warning": [bgWarning, bgWarningLr, bgWarningDr],
+              "success": [bgSuccess, bgSuccessLr, bgSuccessDr],
+              "alert": [bgAlert, bgAlertLr, bgAlertDr]
+          };
 
-        $('#high-pie').highcharts({
-            credits: false,
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: null
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    center: ['30%', '50%'],
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
-                }
-            },
-            colors: highColors,
-            legend: {
-                x: 90,
-                floating: true,
-                verticalAlign: "middle",
-                layout: "vertical",
-                itemMarginTop: 10
-            },
-            series: [{
-                type: 'pie',
-                name: 'Browser share',
-                data: [
-                    ['0 étoiles', {{$tabNotes[0]*100/array_sum($tabNotes)}}],
-                    ['1 étoiles', {{$tabNotes[1]*100/array_sum($tabNotes)}}],
-                    ['2 étoiles', {{$tabNotes[2]*100/array_sum($tabNotes)}}],
-                    ['3 étoiles', {{$tabNotes[3]*100/array_sum($tabNotes)}}],
-                    ['4 étoiles', {{$tabNotes[4]*100/array_sum($tabNotes)}}],
-                    ['5 étoiles', {{$tabNotes[5]*100/array_sum($tabNotes)}}],
-                ]
-            }]
+          $('#high-pie').highcharts({
+              credits: false,
+              chart: {
+                  plotBackgroundColor: null,
+                  plotBorderWidth: null,
+                  plotShadow: false
+              },
+              title: {
+                  text: null
+              },
+              tooltip: {
+                  pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+              },
+              plotOptions: {
+                  pie: {
+                      center: ['30%', '50%'],
+                      allowPointSelect: true,
+                      cursor: 'pointer',
+                      dataLabels: {
+                          enabled: false
+                      },
+                      showInLegend: true
+                  }
+              },
+              colors: highColors,
+              legend: {
+                  x: 90,
+                  floating: true,
+                  verticalAlign: "middle",
+                  layout: "vertical",
+                  itemMarginTop: 10
+              },
+              series: [{
+                  type: 'pie',
+                  name: 'Browser share',
+                  data: [
+                      ['0 étoiles', {{$tabNotes[0]*100/array_sum($tabNotes)}}],
+                      ['1 étoiles', {{$tabNotes[1]*100/array_sum($tabNotes)}}],
+                      ['2 étoiles', {{$tabNotes[2]*100/array_sum($tabNotes)}}],
+                      ['3 étoiles', {{$tabNotes[3]*100/array_sum($tabNotes)}}],
+                      ['4 étoiles', {{$tabNotes[4]*100/array_sum($tabNotes)}}],
+                      ['5 étoiles', {{$tabNotes[5]*100/array_sum($tabNotes)}}],
+                  ]
+              }]
+          });
+        }
+
+      function perfectHeightMin(box){
+
+        var heights = [];
+
+        $(box+' img').each( function(){
+          if ($(this).height() > 0) {
+
+            heights.push($(this).height());
+          }
+        });
+
+        heights.sort();
+
+        $(box+' img').each(function(){
+          if ($(this).height() > 0) {
+            $(this).css('max-height', heights[0]);
+          }
+        });
+
+      }
+
+      function perfectCaption(){
+
+        $('.captionBox img').on('hover').each(function(){
+          var width = $(this).width();
+          console.log(width);
+          $(this).parent().find('.caption').width(width);
         });
       }
 
       demoHighCharts();
+      perfectHeightMin('.captionBox');
+      perfectHeightMin('.img-box');
+      perfectCaption();
 
       });
     </script>
