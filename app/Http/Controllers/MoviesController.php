@@ -43,39 +43,20 @@ class MoviesController extends Controller
    }
 
    public function detail($id){
+
      $movie = Movies::find($id);
+
+    //  exit(dump($movie->comments()));
+
+     $previousMovie = Movies::where('id', '<', $movie->id)->max('id');
+
+     $nextMovie = Movies::where('id', '>', $movie->id)->min('id');
+
      return view('movies/detail', [
-       'movie' => $movie
+       'movie' => $movie,
+       'prev' => $previousMovie,
+       'next' => $nextMovie,
      ]);
    }
 
-   public static function preview($id){
-     $movies = Movies::all();
-     $ids = [];
-     foreach($movies as $movie) {
-       $ids[]= $movie->id;
-     }
-     $key = array_search($id, $ids);
-     if ($key === 1) {
-       return false;
-     }
-     else
-     {
-       return detail($ids[$key-1]);
-     }
-   }
-   public static function next($id){
-     $movies = Movies::all();
-     $ids = [];
-     foreach($movies as $movie) {
-       $ids[]= $movie->id;
-     }
-     $key = array_search($id, $ids);
-
-       $newid = $ids[$key+1];
-       $movie = Movies::find($newid);
-       return view('movies/detail', [
-         'movie' => $movie
-       ]);;
-   }
 }

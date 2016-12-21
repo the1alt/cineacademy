@@ -21,15 +21,20 @@
 @section('content')
 <section id="content">
   <div class="tray tray-center">
+    <div class="row">
+      <a href="{{ route('movies.create') }}" class="pull-right btn btn-sucess"><i class="fa fa-plus"></i>  Ajouter un film</a>
+    </div>
+    <div class="row">
       <div class="panel-heading">
-          <span class="panel-title">
+        <span class="panel-title">
           <span class="fa fa-table"></span>Liste des films -
           @if(count($movies) === 0)
             aucun film a afficher
           @else
-            nombre de films : {{ count($movies) }}</span>
+            nombre de films : {{ count($movies) }}
+        </span>
       </div>
-      <div class="panel-body pn">
+      <div class="pn">
         <table class="table table-striped table-bordered">
           <thead>
             <tr class="dark">
@@ -77,6 +82,7 @@
           </tbody>
         </table>
       </div>
+    </div>
       @endif
   </div>
 </section>
@@ -101,10 +107,10 @@
             "sNext": ""
           }
         },
-        "iDisplayLength": 10,
+        "iDisplayLength": 5,
         "aLengthMenu": [
-          [10, 25, 50, -1],
-          [10, 25, 50, "All"]
+          [5, 10, 25, 50, -1],
+          [5, 10, 25, 50, "All"]
         ],
         "sDom": '<"dt-panelmenu clearfix"lfr>t<"dt-panelfooter clearfix"ip>',
         "oTableTools": {

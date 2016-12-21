@@ -42,6 +42,7 @@ Route::group(['prefix' => 'actors'], function (){
   Route::get('/create', 'ActorsController@create')->name('actors.create');
   Route::get('/update', 'ActorsController@update')->name('actors.update');
   Route::get('/remove/{id}', 'ActorsController@remove')->name('actors.remove');
+  Route::get('/detail/{id}', 'ActorsController@detail')->name('actors.detail');
 });
 
 Route::group(['prefix' => 'directors'], function (){

@@ -23,6 +23,14 @@ class Movies extends Model
       return $this->belongsToMany('App\Tags', 'tags_movies');
     }
 
+    public function actors(){
+      return $this->belongsToMany('App\Actors', 'actors_movies');
+    }
+
+    public function comments(){
+      return $this->hasMany('App\Comments');
+    }
+
 
 
 
@@ -45,6 +53,20 @@ class Movies extends Model
       return DB::table('movies')
         ->avg('duree');
     }
+
+    public static function getLastMovies(){
+      return DB::table('movies')
+        ->orderBy('date_release', 'desc')
+        ->take(6)
+        ->get();
+    }
+
+    public static function getNbNotes($note){
+      return DB::table('movies')
+        ->where('note_presse', $note)
+        ->count();
+    }
+
 
 
 }

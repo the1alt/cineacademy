@@ -10,7 +10,7 @@
     <div class="tray tray-center">
       <!-- Begin .page-heading -->
       <div class="page-heading">
-        <a href="{{ route('movies.detail', ['id' => $movie['id']-1]) }}" class="btn-move btn-prev"><i class="fa fa-angle-left"></i></a>
+        <a href="{{ route('movies.detail', ['id' => $prev]) }}" class="btn btn-move btn-prev @if($prev === null)disabled @endif"> <i class="fa fa-angle-left"></i></a>
         <div class="media clearfix">
           <div class="media-left pr30">
             <div class="modal-content">
@@ -31,7 +31,7 @@
             </div>
           </div>
         </div>
-        <a href="{{ route('movies.detail', ['id' => $movie['id']+1]) }}" class="btn-move btn-next"><i class="fa fa-angle-right"></i></a>
+        <a href="{{ route('movies.detail', ['id' => $next]) }}" class="btn btn-move btn-next @if($next === null)disabled @endif"><i class="fa fa-angle-right"></i></a>
 
       </div>
 
@@ -44,7 +44,7 @@
                 </span>
                 <span class="panel-title"> Infos</span>
               </div>
-              <div class="panel-body pn">
+              <div class="pn">
                 <table class="table mbn tc-med-2 tc-bold-last">
                     <tr>
                       <td>Date de sortie</td>
@@ -88,7 +88,33 @@
                 @endforeach
               </div>
             </div>
+            <div class="panel">
+              <div class="panel-heading">
+                <span class="panel-icon">
+                  <i class="fa fa-users"></i>
+                </span>
+                <span class="panel-title">Acteurs</span>
+              </div>
+              <div class="pn">
+                <table class="table mbn tc-med-2 tc-bold-last">
+                  @foreach ($movie->actors as $actor)
+                    <tr>
+                      <td>
+                        {{$actor->firstname}} {{$actor->lastname}}
+                      </td>
+                      <td>
+                        <img src="{{$actor->image}}" alt="" class="img-responsive mw50"/>
+                      </td>
+                    </tr>
+                  @endforeach
+                </table>
+                <ul>
+
+                </ul>
+              </div>
+            </div>
           </div>
+
           <div class="col-md-8">
 
             <div class="tab-block">
@@ -101,6 +127,9 @@
                 </li>
                 <li>
                   <a href="#tab3" data-toggle="tab">Trailer</a>
+                </li>
+                <li>
+                  <a href="#tab4" data-toggle="tab">Commentaires</a>
                 </li>
               </ul>
               <div class="tab-content p30">
@@ -118,6 +147,15 @@
                   <div class="incrusteTv">
                     {!! $movie->trailer !!}
                   </div>
+                </div>
+                <div id="tab4" class="tab-pane">
+                  @foreach ($movie->comments as $comment)
+                    <blockquote >
+                      <p>{{$comment->content}}</p>
+                      <footer><cite>{{$comment->user->username}}</cite></footer>
+                    </blockquote>
+
+                  @endforeach
                 </div>
               </div>
             </div>

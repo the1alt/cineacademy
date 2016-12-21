@@ -29,7 +29,7 @@
               nombre de catégories : {{ $nbCat }}
             </span>
         </div>
-        <div class="panel-body pn">
+        <div class="pn">
           <table class="table table-striped table-bordered">
             <thead>
               <tr class="dark">
