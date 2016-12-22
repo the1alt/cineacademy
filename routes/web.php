@@ -31,7 +31,7 @@ Route::get('/mention', function () {
 
 Route::group(['prefix' => 'movies'], function (){
   Route::get('/index', 'MoviesController@index')->name('movies.index');
-  Route::get('/create', 'MoviesController@create')->name('movies.create');
+  Route::any('/create', 'MoviesController@create')->name('movies.create');
   Route::get('/update', 'MoviesController@update')->name('movies.update');
   Route::get('/remove/{id}', 'MoviesController@remove')->name('movies.remove');
   Route::get('/detail/{id}', 'MoviesController@detail')->name('movies.detail');

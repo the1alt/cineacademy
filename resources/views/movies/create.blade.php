@@ -4,6 +4,10 @@
     <!-- Admin Forms CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('admin-tools/admin-forms/css/admin-forms.css')}}">
 
+
+      <!-- Summernote CSS  -->
+      <link rel="stylesheet" type="text/css" href="{{asset('vendor/plugins/summernote/summernote.css')}}">
+
     <!-- Required Plugin CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('vendor/plugins/tagmanager/tagmanager.css')}}">
 @endsection
@@ -26,7 +30,18 @@
           <div class="admin-form theme-danger">
             <div class="panel heading-border panel-danger">
               <div class="panel-body bg-light">
+                @if(count($errors->all()))
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <form method="post" action=" {{ route('movies.create') }}" id="form-ui" enctype='multipart/form-data' >
+
+                  {{csrf_field()}}
                   <div class="section-divider mb40" id="spy1">
                     <span>Informations principales</span>
                   </div>
@@ -42,6 +57,11 @@
                           </select>
                           <i class="arrow"></i>
                         </label>
+                        @if ($errors->has('title'))
+                           <p class="help-block text-danger">
+                               {{ $errors->first('title') }}
+                           </p>
+                        @endif
                       </div>
                     </div>
                     <div class="col-md-9">
@@ -90,8 +110,8 @@
                     <div class="col-md-3">
                       <div class="section">
                         <label class="field prepend-icon">
-                          <input type="url" name="video" id="video" class="gui-input" placeholder="video">
-                          <label for="video" class="field-icon">
+                          <input type="url" name="trailer" id="trailer" class="gui-input" placeholder="video">
+                          <label for="trailer" class="field-icon">
                             <i class="fa fa-globe"></i>
                           </label>
                         </label>
@@ -110,6 +130,11 @@
                             <i class="fa fa-comments"></i>
                           </label>
                         </label>
+                        @if ($errors->has('synopsis'))
+                           <p class="help-block text-danger">
+                               {{ $errors->first('synopsis') }}
+                           </p>
+                        @endif
                       </div>
                     </div>
                   </div>
@@ -117,16 +142,15 @@
                     <div class="col-md-12">
                       <div class="section">
                         <div class="panel">
-                          <div class="panel-body pn">
-                            <form>
-                              <!-- markdown title -->
-                              <input class="hidden" name="title" type="text" placeholder="Title?" />
-                              <label for="description" class="field">
-                                <textarea class="gui-textarea" id="description" name="description" placeholder="Description"></textarea>
-                              </label>
-                              <button type="submit" class="btn btn-default hidden">Submit</button>
-                            </form>
+                          <div class="panel-body pn of-h" id="summer-demo">
+                            <textarea type="text" name="description" class="summernote" style="height: 400px;">This is the...
+                            </textarea>
                           </div>
+                          @if ($errors->has('description'))
+                             <p class="help-block text-danger">
+                                 {{ $errors->first('description') }}
+                             </p>
+                          @endif
                         </div>
                       </div>
                     </div>
@@ -139,29 +163,29 @@
                       <div class="col-md-4 pr40 border-right">
                         <span class="rating block">
                           <span class="lbl-text">Note de la presse</span>
-                          <input class="rating-input" id="r5" type="radio" name="custom" value="5">
+                          <input class="rating-input" id="r5" type="radio" name="note_presse" value="5">
                           <label class="rating-star" for="r5">
                             <i class="fa fa-star"></i>
                           </label>
-                          <input class="rating-input" id="r4" type="radio" name="custom" value="4">
+                          <input class="rating-input" id="r4" type="radio" name="note_presse" value="4">
                           <label class="rating-star" for="r4">
                             <i class="fa fa-star"></i>
                           </label>
-                          <input class="rating-input" id="r3" type="radio" name="custom" value="3">
+                          <input class="rating-input" id="r3" type="radio" name="note_presse" value="3">
                           <label class="rating-star" for="r3">
                             <i class="fa fa-star"></i>
                           </label>
-                          <input class="rating-input" id="r2" type="radio" name="custom" value="2">
+                          <input class="rating-input" id="r2" type="radio" name="note_presse" value="2">
                           <label class="rating-star" for="r2">
                             <i class="fa fa-star"></i>
                           </label>
                           </label>
-                          <input class="rating-input" id="r1" type="radio" name="custom" value="1">
+                          <input class="rating-input" id="r1" type="radio" name="note_presse" value="1">
                           <label class="rating-star" for="r1">
                             <i class="fa fa-star"></i>
                           </label>
                           </label>
-                          <input class="rating-input" id="r0" type="radio" name="custom" value="0">
+                          <input class="rating-input" id="r0" type="radio" name="note_presse" value="0">
                           <label class="rating-star" for="r0">
                             <i class="fa fa-times"></i>
                           </label>
@@ -170,12 +194,12 @@
                       <div class="col-md-4">
                         <div class="section">
                           <label class="field select">
-                            <select id="langue" name="langue" class="form-control">
+                            <select id="languages" name="languages" class="form-control">
                               <option value="" selected disabled>langue</option>
-                              <option value="long-métrage">FR</option>
-                              <option value="court-métrage">EN</option>
-                              <option value="court-métrage">ES</option>
-                              <option value="court-métrage">IT</option>
+                              <option value="FR">FR</option>
+                              <option value="EN">EN</option>
+                              <option value="ES">ES</option>
+                              <option value="IT">IT</option>
                             </select>
                             <i class="arrow"></i>
                           </label>
@@ -184,7 +208,7 @@
                       <div class="col-md-4">
                         <div class="section">
                           <label class="field select">
-                            <select id="BO" name="BO" class="form-control">
+                            <select id="BO" name="bo" class="form-control">
                               <option value="" selected disabled>BO</option>
                               <option value="VO">VO</option>
                               <option value="VOST">VOST</option>
@@ -255,7 +279,7 @@
                       <div class="section">
                         <div class="option-group field">
                           <label class="block mt15 switch switch-danger">
-                            <input type="checkbox" name="visible" id="visible" value="visible">
+                            <input type="checkbox" name="visible" id="visible" value="1">
                             <label for="visible" data-on="OUI" data-off="NON"></label>
                             <span >Au cinéma</span>
                           </label>
@@ -265,12 +289,15 @@
                     <div class="col-md-3">
                       <div class="section">
                         <label class="block mt15 switch switch-danger">
-                          <input type="checkbox" name="cover" id="cover" value="cover">
+                          <input type="checkbox" name="cover" id="cover" value="1">
                           <label for="cover" data-on="OUI" data-off="NON"></label>
                           <span>Cover</span>
                         </label>
                       </div>
                     </div>
+                  </div>
+                  <div class="row">
+                    <button type="submit" name="button" class="btn btn-danger">Valider</button>
                   </div>
                 </form>
               </div>
@@ -306,6 +333,21 @@
 
   <script type="text/javascript">
     $(document).ready(function(){
+
+
+      // Init Summernote Plugin
+      $('.summernote').summernote({
+        height: 255, //set editable area's height
+        focus: false, //set focus editable area after Initialize summernote
+        oninit: function() {},
+        onChange: function(contents, $editable) {},
+      });
+
+      // Init Inline Summernote Plugin
+      $('.summernote-edit').summernote({
+        airMode: true,
+        focus: false //set focus editable area after Initialize summernote
+      });
 
       $('#duree').timepicker({
         beforeShow: function(input, inst) {
